@@ -23,8 +23,10 @@
 				<td>${location.code}</td>
 				<td>${location.name}</td>
 				<td>${location.type}</td>
+				<td><a href="deleteLocation?id=${location.id}">delete</a></td>
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="showCreate">Add Location</a>
 </body>
 </html>

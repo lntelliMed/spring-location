@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lntellimed.location.entities.Location;
 import com.lntellimed.location.service.LocationService;
@@ -34,7 +35,17 @@ public class LocationController {
 	@RequestMapping("/displayLocations")
 	public String displayLocations (ModelMap modelMap) {
 		List<Location> locations = locationService.getAllLocations();
-		System.out.println(locations);
+		modelMap.addAttribute("locations", locations);
+		return "displayLocations";
+	}
+	
+	@RequestMapping("deleteLocation")
+	public String deleteLocation(@RequestParam("id") int id, ModelMap modelMap) {
+//		Location location = locationService.getLocationById(id);
+		Location location = new Location();
+		location.setId(id);
+		locationService.deleteLocation(location);
+		List<Location> locations = locationService.getAllLocations();
 		modelMap.addAttribute("locations", locations);
 		return "displayLocations";
 	}
